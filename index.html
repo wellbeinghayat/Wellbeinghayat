@@ -27,8 +27,8 @@ nav{background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);padding:0 2rem;disp
 @media(max-width:640px){.nav-links .hide-mobile{display:none}}
 
 /* LOGO HERO */
-.logo-hero{text-align:center;padding:3rem 2rem 0;background:#fff}
-.logo-hero img{height:110px;width:auto;display:inline-block}
+.logo-hero{text-align:center;padding:4rem 2rem 2rem;background:#fff}
+.logo-hero img{height:200px;width:auto;display:inline-block;max-width:90%}
 
 /* HERO */
 .hero{padding:2.5rem 2rem 4.5rem;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08)}
@@ -261,10 +261,21 @@ footer a:hover{color:#185FA5}
     <div class="section-tag" style="color:#185FA5">Stay connected</div>
     <h2>Be part of the journey</h2>
     <p>Join our early access list and be the first to know when our apps launch — no spam, just meaningful updates.</p>
-    <div class="contact-form">
-      <input type="email" placeholder="Your email address" aria-label="Email address"/>
-      <button type="button">Subscribe</button>
-    </div>
+    <form class="contact-form" id="subscribe-form" action="https://formspree.io/f/xrewzbyb" method="POST">
+      <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required/>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p id="form-success" style="display:none;margin-top:1rem;color:#0C447C;font-size:14px;font-weight:500">&#10003; Thank you! We'll be in touch when we launch.</p>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', function(e){
+        e.preventDefault();
+        fetch(this.action, {method:'POST', body: new FormData(this), headers:{Accept:'application/json'}})
+          .then(function(r){
+            if(r.ok){ document.getElementById('subscribe-form').style.display='none'; document.getElementById('form-success').style.display='block'; }
+            else{ alert('Something went wrong. Please try again.'); }
+          }).catch(function(){ alert('Something went wrong. Please try again.'); });
+      });
+    </script>
   </div>
 </section>
 
