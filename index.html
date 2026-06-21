@@ -108,8 +108,14 @@ section{padding:5rem 2rem}
 .contact-inner{max-width:580px;margin:0 auto;text-align:center}
 .contact-inner h2{font-size:clamp(1.6rem,3vw,2rem);color:#042C53;margin-bottom:.65rem}
 .contact-inner p{color:#185FA5;font-size:15px;line-height:1.7;margin-bottom:1.75rem}
-.brevo-form-wrap{max-width:560px;margin:0 auto}
-.brevo-form-wrap iframe{border-radius:12px;max-width:100%}
+/* POPUP */
+.popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:1000;align-items:center;justify-content:center}
+.popup-overlay.active{display:flex}
+.popup-box{background:#fff;border-radius:16px;padding:2rem;max-width:580px;width:90%;position:relative;max-height:90vh;overflow-y:auto}
+.popup-close{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer;color:#888;background:none;border:none;line-height:1}
+.popup-close:hover{color:#1a1a1a}
+.popup-box h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:#042C53;margin-bottom:.5rem}
+.popup-box p{font-size:14px;color:#555;margin-bottom:1.25rem;line-height:1.6}
 
 /* FOOTER */
 footer{background:#fff;border-top:1px solid rgba(0,0,0,0.08);padding:2rem;text-align:center;font-size:13px;color:#888}
@@ -258,11 +264,26 @@ footer a:hover{color:#185FA5}
     <div class="section-tag" style="color:#185FA5">Stay connected</div>
     <h2>Be part of the journey</h2>
     <p>Join our early access list and be the first to know when our apps launch — no spam, just meaningful updates.</p>
-    <div style="max-width:560px;margin:0 auto;">
-      <iframe width="540" height="305" src="https://5879a5d1.sibforms.com/v2/serve/MUIFAGWa46tz1g1s63EVZZtLrT6neQmph-eb57z1ZjzKvcyA9abwcV47tosVNUU6_7mdzBFE-uJmuSolvAJ_p_4grZyRShpwcIhSTXfCAC7OjD_TkjFl_oi2CgCSXavGWTgoAcR7gI_HzlX3ULG8fqHxG_N1jxNq49BEZo2OWdGqFcv1i8J8s5a9B28Yn0fcm423ky39_4PQHpRAPQ==" frameborder="0" scrolling="auto" allowfullscreen style="display:block;margin-left:auto;margin-right:auto;max-width:100%;border-radius:12px;"></iframe>
-    </div>
+    <button class="btn-primary" onclick="document.getElementById('subscribe-popup').classList.add('active')" style="margin:0 auto">Subscribe Now</button>
   </div>
 </section>
+
+<!-- SUBSCRIBE POPUP -->
+<div class="popup-overlay" id="subscribe-popup">
+  <div class="popup-box">
+    <button class="popup-close" onclick="document.getElementById('subscribe-popup').classList.remove('active')" aria-label="Close">&times;</button>
+    <h3>Join the Wellbeing Hayat journey</h3>
+    <p>Be the first to know when our apps launch. No spam — just meaningful updates.</p>
+    <iframe width="100%" height="420" src="https://5879a5d1.sibforms.com/v2/serve/MUIFAGWa46tz1g1s63EVZZtLrT6neQmph-eb57z1ZjzKvcyA9abwcV47tosVNUU6_7mdzBFE-uJmuSolvAJ_p_4grZyRShpwcIhSTXfCAC7OjD_TkjFl_oi2CgCSXavGWTgoAcR7gI_HzlX3ULG8fqHxG_N1jxNq49BEZo2OWdGqFcv1i8J8s5a9B28Yn0fcm423ky39_4PQHpRAPQ==" frameborder="0" scrolling="auto" allowfullscreen style="display:block;border:none;"></iframe>
+  </div>
+</div>
+
+<script>
+  // Close popup when clicking outside the box
+  document.getElementById('subscribe-popup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('active');
+  });
+</script>
 
 <footer>
   <p>&copy; 2025 <span>Wellbeing Hayat</span> &middot; Building apps for a better life &middot; <a href="#">Privacy</a></p>
